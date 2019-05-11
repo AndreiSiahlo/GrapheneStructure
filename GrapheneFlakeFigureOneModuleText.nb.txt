@@ -145,5 +145,5 @@ ShowGrapheneStructure =
    GrapheneLinesABm1u, {Yellow, GrapheneAtomsAd}, {Green, 
     GrapheneAtomsBd}, {Yellow, GrapheneAtomsAu}, {Green, 
     GrapheneAtomsBu}}]
-Export[FileNameJoin[{NotebookDirectory[], 
-   "ShowGrapheneStructure.bmp"}], ShowGrapheneStructure]
+Export[ToFileName[NotebookDirectory[], 
+  "ShowGrapheneStructure.jpg"], ShowGrapheneStructure]
