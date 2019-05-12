@@ -1,149 +1,85 @@
-"Code in Wolfram Mathematica6+ that draws the graphene structure"
-
-"GrapheneFlakeFigureOneModuleText.nb.txt"
+ "GraphrneFlakeFigureOneModuleText.nb.txt"
 "Copy the whole text to a Wolfram Mathematica 6+ notebook and run"
-"I. Input numbers"
-nm = 10.^(-9) m;
-AA = 0.1 nm
-mcm = 10.^(-6) m;
-meV = eV/1000;
-"I.1. Input Geometry constants  (see \
-Figure3a(Spirale1L15nmCC2.01CNB2.01epsm35).nb)"
-"aCC,  aa"
-aCCp = 1.42 AA
-aa = aCC 2 Sqrt[3]
-aap = aCCp 2 Sqrt[3]
-"Sa  (=Scell/2,  Scell~0.051nm^2,  \
-https://ru.wikipedia.org/wiki/Физика_графена)"
-Sa = (aCC^2) 3 Sqrt[3]/4
-Sap = (aCC^2) 3 Sqrt[3]/4
-"h,  n1"
-h334 = N[0.334 nm]
-"I.3. Input parameters"
+"I.1. Input parameters"
 "Parameters of the Graphene Flake"
-" Length of the Flake[m]"
-"Lnm30"
-Lnm30 = 30.0 nm
-"nL - the number of the cells along the length of the flake"
-nL10 = 10
-"nW - the number of the cell along the width of the flake"
-nW10 = 5
-nL10 = 7;
-"Nf1   the number of the graphene layers in the flake"
-nf3 = 3;
-nLp = nL10;
-nWp = nW10;
-nHp = nf3;
-Print["aCCp=", aCCp, "aap=", aap, "h334=", h334];
-nLp = nL10;
-nWp = nW10;
-nHp = nf3;
-m = 1;
-"Initialize The Coordinates of the Atoms";
-GrapheneFlakeAdXYZ = 
-  Table[{1., 1., 1.}, {iL, 1, nLp}, {jW, 1, nWp}, {kH, 1, nHp}];
-GrapheneFlakeAuXYZ = 
-  Table[{1., 1., 1.}, {iL, 1, nLp}, {jW, 1, nWp}, {kH, 1, nHp}];
-GrapheneFlakeBdXYZ = 
-  Table[{1., 1., 1.}, {iL, 1, nLp}, {jW, 1, nWp}, {kH, 1, nHp}];
-GrapheneFlakeBuXYZ = 
-  Table[{1., 1., 1.}, {iL, 1, nLp}, {jW, 1, nWp}, {kH, 1, nHp}];
-GrapheneAtomsAd = 
-  Table[Sphere[GrapheneFlakeAdXYZ[[iL, jW, kH]], 0.02 nm], {iL, 
-    nLp}, {jW, nWp}, {kH, nHp}];
-GrapheneAtomsAu = 
-  Table[Sphere[GrapheneFlakeAuXYZ[[iL, jW, kH]], 0.02 nm], {iL, 
-    nLp}, {jW, nWp}, {kH, nHp}];
-GrapheneAtomsBd = 
-  Table[Sphere[GrapheneFlakeBdXYZ[[iL, jW, kH]], 0.02 nm], {iL, 
-    nLp}, {jW, nWp}, {kH, nHp}];
-GrapheneAtomsBu = 
-  Table[Sphere[GrapheneFlakeBuXYZ[[iL, jW, kH]], 0.02 nm], {iL, 
-    nLp}, {jW, nWp}, {kH, nHp}];
-GrapheneAtomsBd = 
-  Table[Sphere[GrapheneFlakeBdXYZ[[iL, jW, kH]], 0.02 nm], {iL, 
-    nLp}, {jW, nWp}, {kH, nHp}];
-GrapheneAtomsBu = 
-  Table[Sphere[GrapheneFlakeBuXYZ[[iL, jW, kH]], 0.02 nm], {iL, 
-    nLp}, {jW, nWp}, {kH, nHp}];
-Clear[iL, iW, iH, xA, yAd, yAu, yAd, zA, xB, yBd, yBu, zB];
-DebugLoop = 0;
-For[iH = 1, iH <= nHp, iH++, If[DebugLoop >= 3, Print["iH=", iH];];
- For[iW = 1, iW <= nWp, iW++, If[DebugLoop == 1, Print["iW=", iW];];
-  For[iL = 1, iL <= nLp, iL++, If[DebugLoop, Print["iL=", iL]];
-   xA = If[
-     IntegerPart[(iW - 1)/2] == (iW - 1)/
-       2, (iL - 1) 1.5 aCCp, (iL - 1) 1.5 aCCp + 0.0 aCCp];
-   yAd = If[
-     IntegerPart[(iL - 1)/2] == (iL - 1)/
-       2, (iW - 1) (aap/2), (iW - 1) (aap/2) - 0.25 aap];
-   yAu = If[
-     IntegerPart[(iL - 1)/2] == (iL - 1)/
-       2, (iW - 1) (aap/2), (iW - 1) (aap/2) + 0.25 aap];
-   zA = h334 iH;
-   If[IntegerPart[iH/2] != iH/2, xA = xA - 0.75 aCCp;
-    yAd + 1.25 aap;];
-   If[DebugLoop >= 300, 
-    Print["IntegerPart[iH/2]\[NotEqual]iH/2", 
-      IntegerPart[iH/2] != iH/2];];
-   If[DebugLoop == 1, 
-    Print["iW=", iW, ", yAd=", yAd, ",Even=", 
-     IntegerPart[(iW - 1)/2] == (iW - 1)/2]];
-   If[DebugLoop == 1, 
-    Print["yATrue=", (iW - 1) (aap/2), 
-     ", yAFalse=", (iW - 1) (aap/2) + aap/2.]];
-   xB = xA + aCCp;
-   yBd = yAd;
-   yBu = yAu;
-   zB = zA;
-   If[DebugLoop, Print["{xA,yAd,zA}/aap=", {xA, yAd, zA}/aap]];
-   If[DebugLoop, Print["{xB,yB,zB}/aap=", {xB, yB, zB}/aap]];
-   GrapheneFlakeAdXYZ[[iL, iW, iH]] = {xA, yAd, zA};
-   GrapheneFlakeAuXYZ[[iL, iW, iH]] = {xA, yAu, zA};
-   GrapheneFlakeBdXYZ[[iL, iW, iH]] = {xB, yBd, zB};
-   GrapheneFlakeBuXYZ[[iL, iW, iH]] = {xB, yBu, zB};]]]
-Clear[iL, iW, iH, xA, yA, zA, xB, yB, zB]; GrapheneAtomsAd = 
- Table[Sphere[GrapheneFlakeAdXYZ[[iL, jW, kH]], 0.02 nm], {iL, 
-   nLp}, {jW, nWp}, {kH, nHp}];
-GrapheneAtomsBd = 
-  Table[Sphere[GrapheneFlakeBdXYZ[[iL, jW, kH]], 0.02 nm], {iL, 
-    nLp}, {jW, nWp}, {kH, nHp}];
-GrapheneAtomsAu = 
-  Table[Sphere[GrapheneFlakeAuXYZ[[iL, jW, kH]], 0.02 nm], {iL, 
-    nLp}, {jW, nWp}, {kH, nHp}];
-GrapheneAtomsBu = 
-  Table[Sphere[GrapheneFlakeBuXYZ[[iL, jW, kH]], 0.02 nm], {iL, 
-    nLp}, {jW, nWp}, {kH, nHp}];
-"Graphene Atoms"
-Graphics3D[{{Black, GrapheneAtomsAd}, {Yellow, GrapheneAtomsBd}}]
+"nL7 - the number of the cells along the length of the flake"
+nL7=7
+"nW5 - the number of the cell along the width of the flake"
+nW5=5
+"Nf3   the number of the graphene layers in the flake"
+nf3=3;
 "------------------"
-nLp = nL10;
-nWp = nW10;
-nHp = nf3;
-GrapheneLinesABd = 
-  Table[Line[{GrapheneFlakeAdXYZ[[iL, jW, kH]], 
-     GrapheneFlakeBdXYZ[[iL, jW, kH]]}], {iL, nLp}, {jW, nWp}, {kH, 
-    nHp}];
-GrapheneLinesABu = 
-  Table[Line[{GrapheneFlakeAuXYZ[[iL, jW, kH]], 
-     GrapheneFlakeBuXYZ[[iL, jW, kH]]}], {iL, nLp}, {jW, nWp}, {kH, 
-    nHp}];
-GrapheneLinesABm1d = 
-  Table[Line[{GrapheneFlakeAdXYZ[[iL, jW, kH]], 
-     GrapheneFlakeBdXYZ[[iL - 1, jW, kH]]}], {iL, 2, nLp}, {jW, 
-    nWp}, {kH, nHp}];
-GrapheneLinesABm1u = 
-  Table[Line[{GrapheneFlakeAuXYZ[[iL, jW, kH]], 
-     GrapheneFlakeBuXYZ[[iL - 1, jW, kH]]}], {iL, 2, nLp}, {jW, 
-    nWp}, {kH, nHp}];
+nLp=nL7;
+nWp=nW5;
+nHp=nf3;
+"I.2 Units"
+nm=10.^(-9) m;
+AA=0.1 nm
+mcm=10.^(-6) m;
+meV=eV/1000;
+"I.3. Input Geometry constants "
+"aCC,  aa"
+aCCp=1.42 AA
+aa=aCC 2 Sqrt[3]
+aap=aCCp 2 Sqrt[3]
+"Sa  (=Scell/2,  Scell~0.051nm^2,  https://ru.wikipedia.org/wiki/Физика_графена)"
+Sa=(aCC^2) 3 Sqrt[3]/4
+Sap=(aCC^2) 3 Sqrt[3]/4
+"h,  n1"
+h334=N[0.334 nm]
+Print["aCCp=",aCCp,"aap=",aap,"h334=",h334];
+m=1;
+"Initialize The Coordinates of the Atoms";
+GrapheneFlakeAdXYZ=Table[{1.,1.,1.},{iL,1,nLp},{jW,1,nWp},{kH,1,nHp}];
+GrapheneFlakeAuXYZ=Table[{1.,1.,1.},{iL,1,nLp},{jW,1,nWp},{kH,1,nHp}];
+GrapheneFlakeBdXYZ=Table[{1.,1.,1.},{iL,1,nLp},{jW,1,nWp},{kH,1,nHp}];
+GrapheneFlakeBuXYZ=Table[{1.,1.,1.},{iL,1,nLp},{jW,1,nWp},{kH,1,nHp}];
+GrapheneAtomsAd=Table[Sphere[GrapheneFlakeAdXYZ[[iL,jW,kH]],0.02 nm],{iL,nLp},{jW,nWp},{kH,nHp}];
+GrapheneAtomsAu=Table[Sphere[GrapheneFlakeAuXYZ[[iL,jW,kH]],0.02 nm],{iL,nLp},{jW,nWp},{kH,nHp}];
+GrapheneAtomsBd=Table[Sphere[GrapheneFlakeBdXYZ[[iL,jW,kH]],0.02 nm],{iL,nLp},{jW,nWp},{kH,nHp}];
+GrapheneAtomsBu=Table[Sphere[GrapheneFlakeBuXYZ[[iL,jW,kH]],0.02 nm],{iL,nLp},{jW,nWp},{kH,nHp}];
+GrapheneAtomsBd=Table[Sphere[GrapheneFlakeBdXYZ[[iL,jW,kH]],0.02 nm],{iL,nLp},{jW,nWp},{kH,nHp}];
+GrapheneAtomsBu=Table[Sphere[GrapheneFlakeBuXYZ[[iL,jW,kH]],0.02 nm],{iL,nLp},{jW,nWp},{kH,nHp}];
+Clear[iL,iW,iH,xA,yAd,yAu,yAd,zA,xB,yBd,yBu,zB];
+DebugLoop=0;
+For[iH=1,iH£nHp,iH++,If[DebugLoop³3,Print["iH=",iH];];
+ For[iW=1,iW£nWp,iW++,If[DebugLoop1,Print["iW=",iW];];
+  For[iL=1,iL£nLp,iL++,If[DebugLoop,Print["iL=",iL]];
+   xA=If[IntegerPart[(iW-1)/2](iW-1)/2,(iL-1) 1.5 aCCp,(iL-1) 1.5 aCCp+0.0 aCCp];
+   yAd=If[IntegerPart[(iL-1)/2](iL-1)/2,(iW-1) (aap/2),(iW-1) (aap/2)-0.25 aap];
+   yAu=If[IntegerPart[(iL-1)/2](iL-1)/2,(iW-1) (aap/2),(iW-1) (aap/2)+0.25 aap];
+   zA=h334 iH;
+   If[IntegerPart[iH/2]¹iH/2,xA=xA-0.75 aCCp;
+    yAd+1.25 aap;];
+   If[DebugLoop³300,Print["IntegerPart[iH/2]¹iH/2",IntegerPart[iH/2]¹iH/2];];
+   If[DebugLoop1,Print["iW=",iW,", yAd=",yAd,",Even=",IntegerPart[(iW-1)/2](iW-1)/2]];
+   If[DebugLoop1,Print["yATrue=",(iW-1) (aap/2),", yAFalse=",(iW-1) (aap/2)+aap/2.]];
+   xB=xA+aCCp;
+   yBd=yAd;
+   yBu=yAu;
+   zB=zA;
+   If[DebugLoop,Print["{xA,yAd,zA}/aap=",{xA,yAd,zA}/aap]];
+   If[DebugLoop,Print["{xB,yB,zB}/aap=",{xB,yB,zB}/aap]];
+   GrapheneFlakeAdXYZ[[iL,iW,iH]]={xA,yAd,zA};
+   GrapheneFlakeAuXYZ[[iL,iW,iH]]={xA,yAu,zA};
+   GrapheneFlakeBdXYZ[[iL,iW,iH]]={xB,yBd,zB};
+   GrapheneFlakeBuXYZ[[iL,iW,iH]]={xB,yBu,zB};]]]
+Clear[iL,iW,iH,xA,yA,zA,xB,yB,zB];GrapheneAtomsAd=Table[Sphere[GrapheneFlakeAdXYZ[[iL,jW,kH]],0.02 nm],{iL,nLp},{jW,nWp},{kH,nHp}];
+GrapheneAtomsBd=Table[Sphere[GrapheneFlakeBdXYZ[[iL,jW,kH]],0.02 nm],{iL,nLp},{jW,nWp},{kH,nHp}];
+GrapheneAtomsAu=Table[Sphere[GrapheneFlakeAuXYZ[[iL,jW,kH]],0.02 nm],{iL,nLp},{jW,nWp},{kH,nHp}];
+GrapheneAtomsBu=Table[Sphere[GrapheneFlakeBuXYZ[[iL,jW,kH]],0.02 nm],{iL,nLp},{jW,nWp},{kH,nHp}];
+"Graphene Atoms"
+Graphics3D[{{Black,GrapheneAtomsAd},{Yellow,GrapheneAtomsBd}}]
+"------------------"
+nLp=nL7;
+nWp=nW5;
+nHp=nf3;
+GrapheneLinesABd=Table[Line[{GrapheneFlakeAdXYZ[[iL,jW,kH]],GrapheneFlakeBdXYZ[[iL,jW,kH]]}],{iL,nLp},{jW,nWp},{kH,nHp}];
+GrapheneLinesABu=Table[Line[{GrapheneFlakeAuXYZ[[iL,jW,kH]],GrapheneFlakeBuXYZ[[iL,jW,kH]]}],{iL,nLp},{jW,nWp},{kH,nHp}];
+GrapheneLinesABm1d=Table[Line[{GrapheneFlakeAdXYZ[[iL,jW,kH]],GrapheneFlakeBdXYZ[[iL-1,jW,kH]]}],{iL,2,nLp},{jW,nWp},{kH,nHp}];
+GrapheneLinesABm1u=Table[Line[{GrapheneFlakeAuXYZ[[iL,jW,kH]],GrapheneFlakeBuXYZ[[iL-1,jW,kH]]}],{iL,2,nLp},{jW,nWp},{kH,nHp}];
 Graphics3D[{GrapheneLinesABm1d}];
-Graphics3D[{GrapheneLinesABd, GrapheneLinesABm1d}]
-Graphics3D[{GrapheneLinesABd, GrapheneLinesABm1d, GrapheneLinesABu, 
-  GrapheneLinesABm1u}]
-ShowGrapheneStructure = 
- Graphics3D[{GrapheneLinesABd, GrapheneLinesABm1d, GrapheneLinesABu, 
-   GrapheneLinesABm1u, {Yellow, GrapheneAtomsAd}, {Green, 
-    GrapheneAtomsBd}, {Yellow, GrapheneAtomsAu}, {Green, 
-    GrapheneAtomsBu}}]
-Export[ToFileName[NotebookDirectory[], 
-  "ShowGrapheneStructure.jpg"], ShowGrapheneStructure]
+Graphics3D[{GrapheneLinesABd,GrapheneLinesABm1d}]
+Graphics3D[{GrapheneLinesABd,GrapheneLinesABm1d,GrapheneLinesABu,GrapheneLinesABm1u}]
+GrapheneFlakeFigure=Graphics3D[{GrapheneLinesABd,GrapheneLinesABm1d,GrapheneLinesABu,GrapheneLinesABm1u,{Yellow,GrapheneAtomsAd},{Green,GrapheneAtomsBd},{Yellow,GrapheneAtomsAu},{Green,GrapheneAtomsBu}}]
+Export[ToFileName[NotebookDirectory[],"GrapheneFlakeFigure.bmp"],GrapheneFlakeFigure]
