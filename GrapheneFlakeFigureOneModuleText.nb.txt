@@ -10,7 +10,7 @@ Print["nL7 - the number of the cells along the length of the flake"];
 nL7 = 7;
 Print["nW5 - the number of the cell along the width of the flake"];
 nW5 = 5;
-Print["Nf3   the number of the graphene layers in the flake"];
+Print["nf3   the number of the graphene layers in the flake"];
 nf3 = 3;
 nLp = nL7;
 nWp = nW5;
