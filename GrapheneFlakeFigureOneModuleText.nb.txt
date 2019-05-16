@@ -17,6 +17,7 @@ nWp = nW5;
 nHp = nf3;
 
 Print["I.2 Units"];
+m=.;
 nm = 10.^(-9) m;
 AA = 0.1 nm;
 Print["I.3.Input Geometry constants "];
