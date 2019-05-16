@@ -30,7 +30,7 @@ Print["Sa=", Sa, "=", Sap];
 h334 = N[0.334 nm];
 Print["h=", h334];
 m = 1;
-Print["II Generate the Atom coordinates in the graphene flake"];
+Print["II Generate the Atom coordinates in the Graphene Flake"];
 Print["II.1. Initialize the Coordinates of the Atoms"];
 GrapheneFlakeAdXYZ = Table[{1., 1., 1.}, {iL, 1, nLp}, {jW, 1, nWp}, {kH, 1, nHp}];
 GrapheneFlakeAuXYZ = Table[{1., 1., 1.}, {iL, 1, nLp}, {jW, 1, nWp}, {kH, 1, nHp}];
