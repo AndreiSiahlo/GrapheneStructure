@@ -59,8 +59,6 @@ For[iH = 1, iH <= nHp, iH++,
    If[IntegerPart[iH/2] != iH/2 , 
     xA = xA - 0.75 aCCp; 
     yAd + 1.25 aap;];
-   If[DebugLoop >= 300, 
-    Print["IntegerPart[iH/2]\[NotEqual]iH/2",IntegerPart[iH/2] != iH/2];];
    If[DebugLoop == 1,Print["iW=", iW, ", yAd=", yAd, ",Even=",IntegerPart[(iW - 1)/2] == (iW - 1)/2]];
    If[DebugLoop == 1,Print["yATrue=", (iW - 1) (aap/2),", yAFalse=", (iW - 1) (aap/2) + aap/2.]];
    xB = xA + aCCp;
@@ -78,10 +76,6 @@ For[iH = 1, iH <= nHp, iH++,
  ];
 Clear[iL, iW, iH, xA, yA, zA, xB, yB, zB];
 GrapheneAtomsAd = Table[Sphere[GrapheneFlakeAdXYZ[[iL, jW, kH]], 0.02 nm], {iL,nLp}, {jW, nWp}, {kH, nHp}];
-(*"------------------"*)
-nLp = nL7;
-nWp = nW5;
-nHp = nf3;
 
 GrapheneAtomsBd = Table[Sphere[GrapheneFlakeBdXYZ[[iL, jW, kH]], 0.02 nm], {iL,nLp}, {jW, nWp}, {kH, nHp}];
 GrapheneAtomsAu = Table[Sphere[GrapheneFlakeAuXYZ[[iL, jW, kH]], 0.02 nm], {iL,nLp}, {jW, nWp}, {kH, nHp}];
